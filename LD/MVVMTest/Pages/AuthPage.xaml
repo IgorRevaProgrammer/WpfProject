@@ -1,0 +1,126 @@
+﻿<Page x:Class="MVVMTest.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MVVMTest"
+      xmlns:converter="clr-namespace:MVVMTest.Classes"
+      mc:Ignorable="d" 
+      Title="AuthPage"
+       Background="{StaticResource BackColorPage}"
+      >
+    <Page.Resources>
+        <converter:TableVisibilityConvert x:Key="OurConvertVisContent"/>
+        <converter:LoadImageVisibilityConvert x:Key="OurConvertVisIcon"/>
+    </Page.Resources>
+
+    <Grid>
+        <Border Height="391" Width="703" 
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                CornerRadius="10"
+                BorderThickness="3"
+                BorderBrush="White"
+                x:Name="myBorder">
+        <Border.Effect>
+            <DropShadowEffect/>
+        </Border.Effect>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Border.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ParallelTimeline Duration="0:0:5">
+                            <DoubleAnimation
+                                Storyboard.TargetName="myBorder"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0"
+                                To="1" 
+                                Duration="0:0:1"/>
+                        </ParallelTimeline>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+            <Grid FocusManager.FocusedElement="{Binding ElementName=LoginBox}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+                <Image Source="../Resource/Левая часть.png" 
+                       RenderOptions.BitmapScalingMode="HighQuality" 
+                       Grid.Column="0"/>
+            <StackPanel Background="White" Grid.Column="1">
+                <TextBlock Text="Добро пожаловать" 
+                           FontSize="30"
+                           HorizontalAlignment="Center" 
+                           FontFamily="Segoi UI Emoji"
+                           FontWeight="Regular"
+                           Margin="0,50,0,0"
+                      />
+                <Label Content="пожалуйста авторизируйтесь" 
+                       Margin="85,0,0,0"
+                       Foreground="#FF423636"/>
+                <TextBox Text="{ Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                         Name="LoginBox"
+                         Style="{StaticResource PlaceHolder}"
+                         Margin="20,30,21,21"          
+                         Height="37"
+                         Width="262"
+                         FontFamily="Segoe UI Emoji"
+                         FontSize="14"  
+                         Tag="Введите логин"
+                         
+                />
+                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource PlaceHolder}"
+                         Margin="20,0,21,0"     
+                         Height="37"
+                         Width="262"
+                         FontSize="14"
+                         Tag="Введите пароль" FontFamily="/MVVMTest;component/Resource/#Password"  
+                         
+                     />
+                <TextBlock Text="{Binding ErrMsg, UpdateSourceTrigger=PropertyChanged}"
+                           Margin="20 0"    
+                           Width="262"
+                           Height="25"
+                           FontSize="12"/>
+                <Grid>
+                    <Button Content="Войти" 
+                            IsDefault="True"
+                            Command="{Binding Authorization}"
+                            Height="37" 
+                            Width="262"
+                            Margin="0,40,0,0"
+                            Foreground="{StaticResource SpecialColor}"
+                            Background="{StaticResource SpecialColorWithOpacity}"
+                            FontSize="18"
+                            Visibility="{Binding IsVisible, Converter={StaticResource OurConvertVisContent}, Mode=TwoWay}"
+                            
+                        />
+                        <Image Source="../Resource/CircleBlue.png"
+                               Height="50" 
+                               Width="50" 
+                               Visibility="{Binding IsVisible, Converter={StaticResource OurConvertVisIcon}, Mode=TwoWay}">
+                        <Image.RenderTransform>
+                            <RotateTransform x:Name="rotate"
+                                             CenterX="25"
+                                             CenterY="25"/>
+                        </Image.RenderTransform>
+                        <Image.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="rotate"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         By="360" Duration="0:0:1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+    </Grid>
+</Page>

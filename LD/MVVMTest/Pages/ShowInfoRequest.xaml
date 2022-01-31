@@ -1,0 +1,168 @@
+﻿<Page x:Class="MVVMTest.Pages.ShowInfoRequest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MVVMTest.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ShowInfoRequest" Background="White">
+    <ScrollViewer>
+        <Grid Margin="20,20,20,20" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Заявка № " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                     FontSize="25"/>
+                    <TextBlock Text="{Binding Request.request_number ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                     FontSize="25"/>
+                </StackPanel>
+                <Grid Grid.Row="1" HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock Text="Дата создания: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.created_at,StringFormat='{}{0:dd.MM.yyyy HH:mm}' ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="Дата последнего изменения: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.updated_at,StringFormat='{}{0:dd.MM.yyyy HH:mm}' ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="Подразделение: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.DICT_DIVISIONS.division_name ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock Text="Отделение: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.DICT_SERVICES.serv_name ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal">
+                        <TextBlock Text="Статус: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.DICT_STATUSES.status_name ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Orientation="Horizontal">
+                        <TextBlock Text="Стадия: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.DICT_STAGES.stage ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="6" Orientation="Horizontal">
+                        <TextBlock Text="Заявитель: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.DICT_USERS.user_full_name ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="7" Orientation="Horizontal">
+                        <TextBlock Text="Исполнитель: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.DICT_EXECUTORS.exec_full_name ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel Grid.Row="8" Orientation="Horizontal">
+                        <TextBlock Text="Дата принятия заявки: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <TextBlock 
+                        Text="{Binding Request.accept_at,StringFormat='{}{0:dd.MM.yyyy HH:mm}' ,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                    </StackPanel>
+                    <StackPanel  Grid.Row="9" Orientation="Vertical">
+                        <TextBlock Text="Номенклатура: " 
+                     Style="{StaticResource TextBlockInfoStyle}" 
+                    />
+                        <DataGrid Style="{DynamicResource TableStyle}"
+                        ItemsSource="{Binding Request.TABLE_REQUEST_NOMENCL, UpdateSourceTrigger=PropertyChanged}"
+                                  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Код"
+                                        Width="50"
+                                        ElementStyle="{StaticResource TextAlignCenter}"
+                                        Binding="{Binding  DICT_NOMENCLATURE.GLOBAL_DK.Code}"/>
+                                <DataGridTextColumn Header="Наименование"
+                                        Width="150"
+                                        ElementStyle="{StaticResource TextAlignCenter}"
+                                        Binding="{Binding  DICT_NOMENCLATURE.Name_Mater}"/>
+                                <DataGridTextColumn Header="Описание"
+                                        Width="200"
+                                        ElementStyle="{StaticResource TextAlignCenter}"
+                                        Binding="{Binding  DICT_NOMENCLATURE.cDescription}"/>
+                                <DataGridTextColumn Header="Дата создания"
+                                        Width="100"
+                                        ElementStyle="{StaticResource TextAlignCenter}"
+                                        Binding="{Binding  DICT_NOMENCLATURE.DateCreate,StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                                <DataGridTextColumn Header="Дата модификации"
+                                        Width="100"
+                                        ElementStyle="{StaticResource TextAlignCenter}"
+                                        Binding="{Binding  DICT_NOMENCLATURE.DateModify,StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                                <DataGridTextColumn Header="Количество"
+                                        Width="100"
+                                        ElementStyle="{StaticResource TextAlignCenter}"
+                                        Binding="{Binding  quantity}"/>
+                                <DataGridTextColumn Header="Описание заявителя"
+                                        Width="200"
+                                        ElementStyle="{StaticResource TextAlignCenter}"
+                                        Binding="{Binding  user_description}"
+                                                />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Button Grid.Row="1" Content="Назад" Height="20" Width="100" Command="{Binding ComeBackToRequests}"/>
+        </Grid>
+    </ScrollViewer>
+</Page>

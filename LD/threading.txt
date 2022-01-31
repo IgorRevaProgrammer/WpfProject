@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/18331723/this-type-of-collectionview-does-not-support-changes-to-its-sourcecollection-fro
+
+https://www.codeproject.com/Articles/31971/Understanding-SynchronizationContext-Part-I
